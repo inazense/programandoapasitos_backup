@@ -24,7 +24,7 @@ Es una **librería de Python** que nos va a permitir pintar **barras de progreso
 
 El resultado final sería tal que así
 
-![tqdm lib example on python 3](/posts/20191104_1.png)
+![tqdm lib example on python 3](/img/posts/20191104_1.png)
 
 Una simple **barra de progreso**, en el color por defecto de la **terminal**, que se irá rellenando progresivamente según iteremos dentro de nuestro bucle.
 

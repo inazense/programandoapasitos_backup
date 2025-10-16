@@ -9,7 +9,7 @@ pin: false
 math: false
 mermaid: false
 #image:
-#  path: /posts/reactjs-install-placeholder.png
+#  path: /img/posts/reactjs-install-placeholder.png
 #  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VLIAAAA
 #  alt: ReactJS tutorial para Windows.
 ---
@@ -40,7 +40,7 @@ npm --version
 
 Si ha ido todo bien, veremos algo como lo siguiente:
 
-![Versiones de Node y npm](/posts/20190404_1.png)
+![Versiones de Node y npm](/img/posts/20190404_1.png)
 
 ¿Tenemos todo ok? Perfecto. ¿No tenemos algo similar a la imagen? Eso se ha producido debido a que no se han agregado esos comandos a las **variables de entorno**. Podemos solucionarlo siguiendo los pasos que especifican en [ésta pregunta de Stackoverflow](https://stackoverflow.com/questions/27864040/fixing-npm-path-in-windows-8-and-10).
 
@@ -62,7 +62,7 @@ create-react-app --version
 
 De esta manera lo podremos emplear donde gustemos. Veremos algo tal que así:
 
-![Create React App instalado](/posts/20190404_2.png)
+![Create React App instalado](/img/posts/20190404_2.png)
 
 ¡Conseguido! Estamos listos para el último paso, **crear un nuevo proyecto de ReactJS**.
 
@@ -76,7 +76,7 @@ create-react-app my-app
 
 Este comando generará todo lo necesario para poder empezar a usar la nueva aplicación de **ReactJS**. Veremos lo siguiente por consola:
 
-![Creando proyecto React](/posts/20190404_3.png)
+![Creando proyecto React](/img/posts/20190404_3.png)
 
 Al final de la imagen podemos ver que nos dan las instrucciones necesarias para arrancar nuestra aplicación de **ReactJS**, así comprobamos que todo está funcionando como debiera. 
 
@@ -89,7 +89,7 @@ npm start
 
 Y en nuestro navegador por defecto se abrirá la siguiente web:
 
-![ReactJS localhost](/posts/20190404_4.png)
+![ReactJS localhost](/img/posts/20190404_4.png)
 
 Eso sería todo de momento, en futuras entregas iremos ampliando con más cositas.
 
