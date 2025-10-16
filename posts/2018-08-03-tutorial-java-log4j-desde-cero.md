@@ -70,7 +70,7 @@ Podríamos configurarlo a través de código o con la configuración básica por
 
 Para ello nos iremos, dentro de nuestro proyecto, a la carpeta `src/main/resources` y creamos un fichero nuevo que se llame `log4j.properties`.
 
-![default log4j.properties](/posts/20180803.png)
+![default log4j.properties](/img/posts/20180803_1.png)
 
 Lo abrimos y escribimos el siguiente contenido:
 
