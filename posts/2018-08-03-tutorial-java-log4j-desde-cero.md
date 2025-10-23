@@ -18,7 +18,7 @@ En el trabajo me ha surgido la necesidad de trabajar con la librería [Log4j](ht
 
 ## ¿Qué es Log4j?
 
-**Log4j** es una librería perteneciente a los **Java Logging Frameworks** desarrollada por **Apache Software Foundation** usada para generar mensajes de logging de una forma limpia, sencilla, permitiendo filtrarlos por importancia y pudiendo configurar su salida tanto por consola, fichero u otras diferentes.
+**Log4j** es una librería perteneciente a los **Java Logging Frameworks** desarrollada por **Apache Software Foundation** usada para generar mensajes de **logging** de una forma limpia, sencilla, permitiendo filtrarlos por importancia y pudiendo configurar su **salida** tanto por **consola, fichero** u otras diferentes.
 
 ## Niveles de prioridad
 
@@ -32,9 +32,9 @@ Existen diversos niveles de prioridad. Los cinco que más empleo, ordenados por 
 
 ## Appenders
 
-Otra parte fundamental de Log4j son los **appenders**. Y tu te preguntarás, **¿qué son los appenders?** Pues básicamente es cada una de las **salidas por las que puede ser enviado un mensaje de log**.
+Otra parte fundamental de Log4j son los **appenders**. Y tu te preguntarás, **¿qué son los appenders?** Pues básicamente es cada una de las salidas por las que puede ser enviado un mensaje de **log**.
 
-Existen varios appenders y todos ellos son configurables, aunque también podemos crear los nuestros propios.
+Existen varios **appenders** y todos ellos son configurables, aunque también podemos crear los nuestros propios.
 
 Los appenders más usuales son:
 
@@ -52,9 +52,9 @@ Voy a explicar como montar un **sistema logging básico con Log4j** que nos mues
 
 ## Preparándonos
 
-La explicación la voy a realizar con un **proyecto Maven**, así que lo primero que haremos será agregar la dependencia de Log4j a nuestro pom. La podemos encontrar [aquí](https://mvnrepository.com/artifact/log4j/log4j).
+La explicación la voy a realizar con un proyecto **Maven**, así que lo primero que haremos será agregar la dependencia de **Log4j** a nuestro **pom**. La podemos encontrar [aquí](https://mvnrepository.com/artifact/log4j/log4j).
 
-Si no sabes de que te estoy hablando puedes ver [mi anterior entrada sobre Maven](http://www.programandoapasitos.com/2017/07/tutorial-maven-en-eclipse.html) o bajarte el .jar y configurarla manualmente desde el mismo enlace.
+Si no sabes de que te estoy hablando puedes ver [mi anterior entrada sobre **Maven**](http://www.programandoapasitos.com/2017/07/tutorial-maven-en-eclipse.html) o bajarte el **.jar** y configurarla manualmente desde el mismo enlace.
 
 ```xml
 <dependency>
@@ -66,7 +66,7 @@ Si no sabes de que te estoy hablando puedes ver [mi anterior entrada sobre Maven
 
 ## Creando y configurando el archivo log4j.properties
 
-Podríamos configurarlo a través de código o con la configuración básica por defecto, pero lo que vamos a hacer es **configurar las opciones de Log4j a través de un archivo properties**.
+Podríamos configurarlo a través de código o con la configuración básica por defecto, pero lo que vamos a hacer es configurar las opciones de **Log4j** a través de un archivo **properties**.
 
 Para ello nos iremos, dentro de nuestro proyecto, a la carpeta `src/main/resources` y creamos un fichero nuevo que se llame `log4j.properties`.
 
