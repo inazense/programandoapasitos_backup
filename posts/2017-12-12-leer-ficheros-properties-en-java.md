@@ -68,3 +68,5 @@ Después creamos un objeto genérico que será nuestra **clave**, y es la que us
 
 ¿A que resulta tremendamente sencillo? Ahora solo es cuestión de practicar con ello.
 Podéis ver el código completo de esta entrada en mi [**github público**](https://github.com/inazense/scripts/blob/master/scripts/java/ManejadorProperties.java). Ahí tendréis una clase con un **patrón Singleton** que permite manejar este tipo de archivos..
+
+**¡Salud y coding!**
