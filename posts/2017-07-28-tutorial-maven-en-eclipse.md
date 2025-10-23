@@ -1,6 +1,6 @@
 ---
 title: Tutorial Maven en Eclipse
-description: Tutorial sobre cómo leer archivos de propiedades en Java usando la clase Properties
+description: Guía práctica para crear y configurar proyectos Maven en Eclipse, cubriendo POM, dependencias, plugins y solución de errores comunes.
 author: Inazio Claver
 date: 2017-07-28 12:10:00 +0800
 categories: [Java]
