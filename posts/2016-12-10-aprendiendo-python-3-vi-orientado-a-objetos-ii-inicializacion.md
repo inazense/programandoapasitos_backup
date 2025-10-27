@@ -2,9 +2,9 @@
 title: Aprendiendo Python (VI). Orientado a objetos (II). Inicialización
 description: Aprende a usar el método __init__ en Python para inicializar objetos. Tutorial completo sobre constructores, parámetros por defecto, valores None y manejo de errores en programación orientada a objetos.
 author: Inazio Claver
-date: 2016-12-20 12:10:00 +0800
+date: 2016-12-10 12:10:00 +0800
 categories: [Python]
-tags: [python, emails]
+tags: [python, poo]
 pin: false
 math: false
 mermaid: false

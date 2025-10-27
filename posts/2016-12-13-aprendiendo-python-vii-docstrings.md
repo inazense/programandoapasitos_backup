@@ -2,9 +2,9 @@
 title: Aprendiendo Python (VII). Docstrings
 description: Aprende a crear documentación automática en Python usando docstrings. Tutorial completo sobre cómo documentar clases, funciones y métodos con ejemplos prácticos y generación de API documentation.
 author: Inazio Claver
-date: 2016-12-20 12:10:00 +0800
+date: 2016-12-13 12:10:00 +0800
 categories: [Python]
-tags: [python, emails]
+tags: [python, poo]
 pin: false
 math: false
 mermaid: false
