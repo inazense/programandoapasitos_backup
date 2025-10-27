@@ -1,6 +1,6 @@
 ---
 title: Configurar Virtual Host Apache en Ubuntu
-description: Tutorial para leer csv simples y complejos con Java
+description: Guía completa paso a paso para configurar Virtual Host de Apache en Ubuntu 16.04. Aprende a crear múltiples sitios web locales con dominios personalizados, configurar DNS local y gestionar permisos correctamente.
 author: Inazio Claver
 date: 2017-04-16 12:10:00 +0800
 categories: [Sistemas]

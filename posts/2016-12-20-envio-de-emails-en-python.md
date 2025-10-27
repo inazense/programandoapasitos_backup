@@ -1,6 +1,6 @@
 ---
-title: Configurar Virtual Host Apache en Ubuntu
-description: Tutorial para leer csv simples y complejos con Java
+title: Envío de emails en Python
+description: Aprende a enviar emails automáticamente con Python usando smtplib. Tutorial completo con código para automatizar correos electrónicos, formatear fechas y configurar servidores SMTP paso a paso.
 author: Inazio Claver
 date: 2016-12-20 12:10:00 +0800
 categories: [Python]
