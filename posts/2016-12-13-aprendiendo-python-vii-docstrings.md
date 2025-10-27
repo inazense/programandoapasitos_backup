@@ -1,6 +1,6 @@
 ---
 title: Aprendiendo Python (VII). Docstrings
-description: Tutorial para leer csv simples y complejos con Java
+description: Aprende a crear documentación automática en Python usando docstrings. Tutorial completo sobre cómo documentar clases, funciones y métodos con ejemplos prácticos y generación de API documentation.
 author: Inazio Claver
 date: 2016-12-20 12:10:00 +0800
 categories: [Python]
