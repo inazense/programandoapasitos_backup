@@ -1,6 +1,6 @@
 ---
 title: Aprendiendo Python (V). Orientado a objetos
-description: 
+description: Colección de 30 ejercicios prácticos de Python para principiantes con soluciones completas. Aprende programación básica, estructuras de control, bucles, funciones y algoritmos fundamentales paso a paso.
 author: Inazio Claver
 date: 2016-10-07 12:10:00 +0800
 categories: [Python]
