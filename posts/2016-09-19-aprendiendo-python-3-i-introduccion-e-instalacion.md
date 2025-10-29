@@ -2,7 +2,7 @@
 title: Aprendiendo Python (I). Introducción e instalación
 description: Guía completa para principiantes sobre Python 3: instalación paso a paso en Windows, Linux y Mac, configuración del intérprete, primer programa Hola Mundo y diferencias entre Python 2 y 3.
 author: Inazio Claver
-date: 2016-10-19 12:10:00 +0800
+date: 2016-09-19 12:10:00 +0800
 categories: [Python]
 tags: [python]
 pin: false

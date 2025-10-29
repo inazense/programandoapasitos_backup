@@ -3,7 +3,7 @@ title: Galería web responsive. HTML5 + Bootstrap + PHP + Magnific Popup
 description: Crea una galería web responsive con HTML5, Bootstrap, PHP y Magnific Popup. Tutorial completo paso a paso con código para crear lightbox interactivo, navegación entre imágenes y diseño adaptativo móvil.
 author: Inazio Claver
 date: 2016-10-12 13:00:00 +0800
-categories: [Frontend]
+categories: [Web]
 tags: [responsive, html5, bootstrap, php, web]
 pin: false
 math: false
