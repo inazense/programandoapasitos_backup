@@ -297,7 +297,238 @@ grant {
 
 #### Archivo MyCallbackHandler.java
 
+```java
+import java.io.*;
+import javax.security.auth.callback.*;
 
+public class MyCallbackHandler implements CallbackHandler {
+     
+      private String usuario;
+      private String clave;
+     
+      //Constructor recibe parámetros usuario y clave
+      public MyCallbackHandler(String usu, String clave) {
+           
+            this.usuario = usu;
+            this.clave = clave;
+      }
+     
+      //método handle sera invocado por el LoginMbdule
+      public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
+           
+            for (int i = 0; i < callbacks.length; i++) {
+                 
+                  Callback callback = callbacks[i];
+                  if (callback instanceof NameCallback) {
+                        NameCallback nameCB = (NameCallback) callback;
+                        //se asigna al NameCallback el nombre de usuario
+                        nameCB.setName(usuario);    
+                  } else if (callback instanceof PasswordCallback) {
+                        PasswordCallback passwordCB = (PasswordCallback) callback;
+                        //se asigna al PasswordCallback la clave   
+                        passwordCB.setPassword(clave.toCharArray());
+                  }
+            }    
+      }
+}
+```
 
+**CallbackHandler** tiene el método ```handle()``` que será invocado por el **LoginModule** al que le pasará un array de objetos **Callbacks**, que contiene los campos de datos que se necesitan. Cada **Callback** representa uno de los datos comunicados por el usuarios en el proceso de autenticación (nombre, password, etc), es necesario recorrer este array para recuperar los datos.
+
+|Class|Descripción|
+|---|---|
+|NameCallback|El LoginModule quiere que el usuario introduzca un nombre|
+|PasswordCallback|El LoginModule quiere que el usuario introduzca un password|
+|ChoiceCallback|El LoginModule quiere que el usuario elija un valor de un conjunto de valores|
+|ConfirmationCallback|El LoginModule quiere que el usuario responda sí / no / cancelar a una pregunta en particular|
+|TextOutputCallback|El LoginModule envía algún tipo de información al usuario|
+
+#### Archivo EjemploLoginModule.java
+
+```java
+import java.util.Map;
+import javax.security.auth.*;
+import javax.security.auth.callback.*;
+import javax.security.auth.login.LoginException;
+import javax.security.auth.spi.LoginModule;
+
+public class EjemploLoginModule implements LoginModule {
+     
+      private Subject subject;
+      private CallbackHandler callbackHandler;
+     
+      public boolean commit() throws LoginException {return true;}
+     
+      public boolean logout() throws LoginException {return true;}
+     
+      public boolean abort() throws LoginException {return true;}
+     
+      public void initialize(Subject subject, CallbackHandler handler, Map state, Map options) {
+            this.subject = subject;
+            this.callbackHandler = handler;   
+      }
+     
+      //método login - se realiza la autenticación
+      public boolean login() throws LoginException {
+           
+            boolean autenticado = true;
+            if(callbackHandler == null){   
+                  throw new LoginException("Se necesita CallbackHandler");
+            }
+           
+            //Se crea el array de Callbacks
+            Callback[] callbacks = new Callback[2];
+            //Constructor de NameCallback y PasswordCallback con prompt
+            callbacks[0] = new NameCallback("Nombre de usuario: ");
+            callbacks[1] = new PasswordCallback("Clave: ", false);
+           
+            try {
+                  //se invoca al método handle del CallbackHandler
+                  //para solicitar el usuario y la contraseña
+                  callbackHandler.handle(callbacks);
+                  String usuario = ((NameCallback)callbacks[0]).getName();
+                  char [] passw = ((PasswordCallback)callbacks[1]).getPassword();
+                  String clave = new String(passw);
+                 
+                  //La autenticación se realiza aquí
+                  //el nombre de usuario: maria, su clave: 1234
+                  autenticado = ("maria".equalsIgnoreCase(usuario) & "1234".equals(clave)) ;
+            } catch (Exception e) {e.printStackTrace();}
+           
+            return autenticado;//devuelve true o false
+           
+      }
+}
+```
+
+Implementa el **LoginModule** que autenticará a los usuarios en su método ```login()```. Debe implementar los siguientes métodos:
+
+- ```initialize()```: El propósito de este método es inicializar el **LoginModule** con la información con la información relevante. El Subjectpasasdo a este método se usa para almacenar los principales (Principal) y credenciales si la conexión tiene éxito. Recibe un **CallbackHandler** que puede ser usado para introducir información de la autenticación.
+- ```login()```: El propósito de este método es autenticar al **Subject**.
+- ```commit()```: Se llama a este método si tiene éxito la autenticación total del **LoginContext**.
+- ```abort()```: Informa al LoginModule de que algún proveedor o módulo ha fallado al autenticar al **Subject**. Se llama a este método si la autenticación global del **LoginContext** ha fallado.
+- ```logout()```: Desconecta al Subject borrando los principales y credenciales del **Subject**. Finalizará la sesión del usuario.
+
+```bash
+C:>java -Dusuario=maria -Dclave=1234 EjemploJAASAutenticacion
+```
+
+## Autorización
+
+Para que la autorización JAAS tenga lugar, se requiere lo siguiente:
+
+- El usuario debe **autenticarse**. Ya visto
+- En el **fichero de políticas** se deben configurar entradas para los principales
+- Se debe asociar al **Subject** el contexto de control de acceso actual usando los métodos ```doAs()``` o ```doAsPrivileged()``` de la clase **Subject**.
+
+Para lo cual insertaríamos dos nuevas clases al ejemplo anterior.
+
+#### Archivo EjemploAccion.java
+```java
+import java.io.*;
+import java.security.PrivilegedAction;
+
+public class EjemploAccion implements PrivilegedAction {
+     
+      public Object run() {
+           
+            File f = new File("fichero.txt");
+            if (f.exists()) {
+                 
+                  System.out.println("EL FICHERO EXISTE ... ");
+                  //Si existe se muestra su contenido
+                  FileReader fic;
+                  try {
+                        fic = new FileReader(f);
+                        int i;
+                        System.out.println("Su contenido es: ");
+                        while ((i = fic.read()) != -1)
+                             System.out.print((char) i);
+                        fic.close();
+                  } catch (Exception e) { e.printStackTrace();}
+                 
+            }else {
+                 
+                  //Si no existe se crea y se insertan datos
+                  System.out.println("EL FICHERO NO EXISTE, LO CREO ... ");
+                  try {
+                        FileWriter fic = new FileWriter(f);
+                        String cadena = "Esto es una linea de texto";
+                        fic.append(cadena); fic.close();// cerrar fichero
+                        System.out.println("Fichero creado con datos...");
+                  } catch (IOException e) {
+                        System.out.println("ERROR ==> " + e.getMessage());
+                  }
+            }
+           
+            return null;
+           
+      }
+}
+```
+
+Esta clase implementa **PrivilegedAction**, contiene el método ```run()``` que es el código que se ejecutará una vez que el usuario ha sido autenticado, teniendo en cuenta las autorizaciones de los principales definidas en el fichero de políticas.
+
+#### Archivo EjemploPrincipal.java
+
+```java
+import java.security.Principal;
+
+public class EjemploPrincipal implements Principal, java.io.Serializable {
+     
+      private String name;//nombre del principal
+     
+      //Crea un EjemploPrincipal con el nombre suministrado.
+      public EjemploPrincipal(String name) {
+           
+            if (name == null)
+                  throw new NullPointerException("Entrada nula");
+            this.name = name;
+      }
+     
+      //Devuelve el nombre del Principal
+      public String getName() {return name;}
+     
+      //Compara el objeto especificado con el Principal
+      //para ver si son iguales.
+      public boolean equals(Object o) {
+           
+            if (o == null) return false;
+            if (this == o) return true;
+            if (!(o instanceof EjemploPrincipal)) return false;
+            EjemploPrincipal that = (EjemploPrincipal) o;
+            if (this.getName().equals(that.getName())) return true;
+           
+            return false;
+      }//Fin de equals
+
+      public int hashCode() {return name.hashCode();}
+     
+      public String toString() {return (name);}
+     
+}
+```
+
+Esta clase implementa la interface **Principal**, se usa en la clase **EjemploLoginModule** una vez que el usuario ha sido autenticado en el método ```commit()```.
+
+### Privilegios de acceso en el fichero de políticas (policy.config)
+
+```java
+grant {
+     permission javax.security.auth.AuthPermission "createLoginContext.EjemploLogin";
+     permission javax.security.auth.AuthPermission "modifyPrincipals";
+     permission javax.security.auth.AuthPermission "doAsPrivileged";
+};
+
+grant Principal EjemploPrincipal "maria" {
+     permission java.io.FilePermission "fichero.txt", "read";
+} ;
+
+grant Principal EjemploPrincipal "juan" {
+     permission java.io.FilePermission "fichero.txt", "write";
+};
+```
+
+![Clases para el ejemplo de autorización](/img/posts/20160326_2.png)
 
 **¡Salud y coding!**
