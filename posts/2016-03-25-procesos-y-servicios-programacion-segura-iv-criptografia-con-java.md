@@ -488,9 +488,327 @@ jarsigner –verify –verbose –certs –keystore AlmacenReceptor DocumentoFir
 
 ### Clase Cipher
 
+Para crear un objeto **Cipher** se llama al método ```getInstance()``` pasando como argumento el algoritmo y opcionalmente, el nombre de un proveedor.
+
+Como algoritmo en el método ```getInstance()``` se pueden poner los siguientes (algoritmo/modo/relleno), entre paréntesis se especifica el tamañi de la clave en bits:
+
+```
+AES/CBC/NoPadding (128)
+AES/CBC/PKCS5Padding (128)
+AES/ECB/NoPadding (128)
+AES/ECB/PKCS5Padding (128)
+DES/CBC/NoPadding (56)
+DES/CBC/PKCS5Padding (56)
+DES/ECB/NoPadding (56)
+DES/ECB/PKCS5Padding (56)
+DESede/CBC/NoPadding (168)
+DESede/CBC/PKCS5Padding (168)
+DESede/ECB/NoPadding (168)
+DESede/ECB/PKCS5Padding (168)
+RSA/ECB/PKCS1Padding (1024, 2048)
+RSA/ECB/OAEPWithSHA-1AndMGF1Padding (1024, 2048)
+RSA/ECB/OAEPWithSHA-256AndMGF1Padding (1024, 2048)
+```
+
+Los modos son la forma de trabajar del algoritmo
+
+- **ECB** (Electronic Cookbook Mode). Los mensajes se dividen en bloques y cada uno de ellos es cifrado por separado por separado utilizando la misma clave K. A bloques de texto plano o claro idénticos les corresponden bloques idénticos de texto cifrado, de anera que se pueden reconocer estos patrones. De ahí que no sea recomendable.
+- **CBC** (Cipher Block Chaining), a cada bloque de texto plano se le aplica la operación XOR con el bloque cifrado anterior antes de ser cifrado. De esta forma, cada bloque de texto cifrado depende de todo el texto en claro procesado hasta este punto. Para hacer cada men saje único se utilza asimismo un vector de inicialización.
+
+El relleno se utiliza cuando el mensaje a cifrar no es múltiplo de la longitud de cifrado del algoritmo, entonces es necesario indicar la forma de rellenar los últimos bloques.
+
+### Clase KeyGenerator
+
+Proporciona funcionalidades para generar claves secretas para usarse en algoritmos simétricos
+
+## Pasos para encriptar y desencriptar con clave secreta
+
+![proceso de cifrado y descifrado con clave secreta](/img/posts/20160325_2.png)
+
+- Creamos la clave secreta usando **AES** o **DES**.
+- Creamos un objeto **Ciphercon** el algoritmo/modo/relleno que creamos oportuno, lo inicializamos en modo encriptación con la clave creada anteriormente.
+- Realizamos el cifrado de la información con el método ```doFinal()```.
+- Configuramos el objeto **Cipher** en modo desencriptación con la clave anterior para desencriptar el texto, usamos el método ```doFinal()```.
+
+```java
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+
+public class Ejemplo10 {
+     
+      public static void main(String[] args) {
+
+           
+            try {
+           
+                  //Creamos la clave secreta usando el algoritmo AES y deﬁnimos un tamaño de clave de 128 bits
+                  KeyGenerator kg = KeyGenerator.getInstance("AES");
+                  kg.init (128);
+                  SecretKey clave = kg.generateKey();
+                 
+                  //Creamos un objeto Cipher con el algoritmo AES/ECB/PKCS5Padding, lo inicializamos en modo encriptación con la clave creada anteriormente.
+                  Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                  c.init(Cipher.ENCRYPT_MODE, clave);
+                 
+                  //Realizamos el cifrado de la información con el método doFinal()
+                  byte textoPlano[] = "Esto es un Texto Plano".getBytes();
+                  byte textoCifrado[] = c.doFinal(textoPlano);
+                  System.out.println("Encriptado: "+ new String(textoCifrado));
+                 
+                  //Conﬁguramos el objeto Cipher en modo desencriptación con la clave anterior para desencriptar el texto, usamos el método doFinal()
+                  c.init(Cipher.DECRYPT_MODE, clave);
+                  byte desencriptado[] = c.doFinal(textoCifrado);
+                  System.out.println("Desencriptado: "+ new String(desencriptado));
 
 
+                  /*
+                  //Muchos modos de algoritmo (por ejemplo CBC) requieren un vector de inicialización que se especifica cuando se inicializa
+                  //el objeto Cipher en modo desencriptación. En estos casos, se debe pasar al método init() el vector de inicialización.
+                  //La clase IvParameterSpec se usa para hacer esto en el cifrado DES.
+                  KeyGenerator kg = KeyGenerator.getInstance("DES");
+                  Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
+                  Key clave = kg.generateKey();
+                 
+                  //Devuelve el vector IV inicializado en un nuevo buffer
+                  byte iv[]=c.getIV();
+                  IvParameterSpec dps = new IvParameterSpec(iv);
+                  c.init(Cipher.DECRYPT_MODE, clave, dps);
+                  */
 
+            } catch (NoSuchAlgorithmException e) {        
+            } catch (NoSuchPaddingException e) {
+            } catch (InvalidKeyException e) {
+            } catch (IllegalBlockSizeException e) {
+            } catch (BadPaddingException e) {
+      //    } catch (InvalidAlgorithmParameterException e) {
+            }
+           
+      }
+}
+```
 
+## Almacenar la clave secreta en un fichero
+
+```java
+import java.io.*;
+import java.security.*;
+
+import javax.crypto.*;
+
+public class AlmacenaClaveSecreta {
+     
+      public static void main(String[] args) {
+           
+            try {
+                  KeyGenerator kg = KeyGenerator.getInstance("AES");
+                  kg.init(128);
+                  //genera clave secreta
+                  SecretKey clave = kg.generateKey();
+                  ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Clave.secreta"));
+                  out.writeObject(clave);
+                  out.close();
+
+                  /*
+                  //Para recuperar la clave secreta del fichero
+                  ObjectInputStream in = new ObjectInputStream(new FileInputStream("Clave.secreta"));
+                  Key secreta = (Key) in.readObject();
+                  in.close();
+                  */
+                 
+            } catch (NoSuchAlgorithmException e) {e.printStackTrace();
+            } catch (FileNotFoundException e) {e.printStackTrace();
+            //} catch (ClassNotFoundException e) { e.printStackTrace();//Para recuperar la clave secreta
+            } catch (IOException e) {e.printStackTrace();}
+           
+      }
+}
+```
+
+Genera una clave secreta **AES** y la almacena en el fichero ```Clave.secreta```.
+
+## Encriptar y desencriptar con clave pública
+
+Conversación encriptada
+
+![conversacion encriptada](/img/posts/20160325_3.png)
+
+Conversación híbrida
+
+![conversacion híbrida](/img/posts/20160325_4.png)
+
+```java
+import java.security.*;
+import javax.crypto.*;
+
+public class Ejemplo12 {
+     
+      public static void main(String args[]) {
+           
+            try {
+                  //SE CREA EL PAR DE CLAVES PÚBLICA Y PRIVADA
+                  KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+                  keyGen.initialize (1024);
+                  KeyPair par = keyGen.generateKeyPair();
+                  PrivateKey clavepriv = par.getPrivate();
+                  PublicKey clavepub = par.getPublic();
+                 
+                  //SE CREA LA CLAVE SECRETA AES
+                  KeyGenerator kg = KeyGenerator.getInstance("AES");
+                  kg.init (128);
+                  SecretKey clavesecreta = kg.generateKey();
+                 
+                  //SE ENCRIPTA LA CLAVE SECRETA CON LA CLAVE RSA PÚBLICA
+                  Cipher c = Cipher.getInstance("RSA/ECB/PKCSlPadding");
+                  c.init(Cipher.WRAP_MODE, clavepub);
+                  byte claveenvuelta[] = c.wrap(clavesecreta);
+                 
+                  //CIFRAMOS TEXTO CON LA CLAVE SECRETA
+                  c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                  c.init(Cipher.ENCRYPT_MODE, clavesecreta);
+                  byte textoPlano[] = "Esto es un Texto Plano".getBytes();
+                  byte textoCifrado[] = c.doFinal(textoPlano);
+                  System.out.println("Encriptado: " + new String(textoCifrado));
+                 
+            /* Para desencriptar el texto primero necesitamos desencriptar la clave Secreta con la clave privada y a continuación desencriptar el texto con esa clave; usaremos el método unwrap():*/
+                 
+                  //SE DESENCRIPTA LA CLAVE SECRETA CON LA CLAVE RSA PRIVADA
+                  Cipher c2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+                  c2.init(Cipher.UNWRAP_MODE, clavepriv);
+                  Key clavedesenvuelta= c2.unwrap (claveenvuelta, "AES", Cipher.SECRET_KEY);
+                 
+                  //DESCIFRAMOS EL TEXTO CON LA CLAVE DESENVUELTA
+                  c2 = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                  c2.init(Cipher.DECRYPT_MODE, clavedesenvuelta);
+                  byte desencriptado[] = c2.doFinal(textoCifrado);
+                  System.out.println("DesenCriptado:" + new String(desencriptado));
+                            
+            } catch (Exception e) { e.printStackTrace(); }
+           
+      }
+}
+```
+
+- Se genera un par de claves pública y privada con el algoritmo **RSA**.
+- Se crea una clave secreta con el algoritmo **AES**.
+- Esta clave se creará para encriptar el texto.
+- La clave secreta es encriptada mediante la clave pública utilizando el método ```wrap()```
+- Para desencriptar el texto primero necesitamos desencriptar la clave Secreta con la clave priada y a continuación desencriptar el texto con esa clave; usaremos el método ```unwrap()```
+
+### Clave de sesión
+
+Es un término medio entre el cifrado simétrico y asimétrico que permite combinar las dos técnicas. Consiste en generar una clave de sesión K y cifrarla usando la clave pública del receptor. El receptor descifra la clave de sesión usando su clave privada. El emisor y el receptor comparten una clave que solo ellos conocen y pueden cifrar sus comunicaciones usando la misma clave de sesión.
+
+![clave de sesión](/img/posts/20160325_5.png)
+
+## Encriptar y desencriptar flujos de datos
+
+**Clase CipherOutputStream**. Encriptar datos hacia un fichero
+
+**CipherInputStream**. Leer y desencriptar datos de un fichero
+
+Ambas manipular de forma transparente las llamadas a ```update()``` y ```doFinal()```
+
+```java
+import java.io.*;
+import java.security.*;
+import javax.crypto.*;
+
+public class Ejemplo13Cifra { 
+     
+      public static void main(String[] args) {
+           
+            try {
+                  //RECUPERAMOS CLAVE SECRETA DEL FICHERO
+                  ObjectInputStream oin = new ObjectInputStream( new FileInputStream("Clave.secreta"));
+                  Key clavesecreta = (Key) oin.readObject();
+                  oin.close();
+                 
+                  //SE DEFINE EL OBJETO Cipher para encriptar
+                  Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                  c.init(Cipher.ENCRYPT_MODE, clavesecreta);
+                 
+                  //FICHERO A CIFRAR
+                  FileInputStream filein = new FileInputStream("FICHERO.pdf");
+                  //OBJETO CipherOutputStream donde se almacena el fichero cifrado
+                  CipherOutputStream out = new CipherOutputStream( new FileOutputStream("FicheroPDF.Cifrado"), c);
+                  int tambloque = c.getBlockSize();//tamaño de bloque objeto Cipher
+                  byte[] bytes = new byte[tambloque];//bloque de bytes
+                 
+                  //LEEMOS BLOQUES DE BYTES DEL FICHERO PDF
+                  //Y int LO VAMOS ESCRIBIENDO AL CipherOutputStream
+                  int i = filein.read(bytes);
+                  while (i != -1) { 
+                        out.write(bytes, 0, i);
+                        i = filein.read(bytes);
+                  }
+                 
+                  out.flush();
+                  out.close();
+                  filein.close();
+                  System.out.println("Fichero cifrado con clave secreta.");
+                 
+            } catch (Exception e) {e.printStackTrace();}
+           
+      }
+}
+```
+
+Utiliza la clave secreta almacenada en un fichero llamado para cifrar un documento PDF de nombre ```Fichero.pdf```.
+
+```java
+import java.io.*;
+import java.security.*;
+import javax.crypto.*;
+
+public class Ejemplo13Descifra {
+     
+      public static void main(String[] args) {
+           
+            try {
+                  //RECUPERAMOS CLAVE SECRETA DEL FICHERO
+                  ObjectInputStream oin = new ObjectInputStream(new FileInputStream("Clave.secreta"));
+                  Key clavesecreta = (Key) oin.readObject();
+                  oin.close();
+                 
+                  //SE DEFINE EL OBJETO Cipher para desencriptar
+                  Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                  c.init(Cipher.DECRYPT_MODE, clavesecreta);
+                 
+                  //OBJETO CipherInputStream CUYO CONTENIDO SE VA A DESCIFRAR
+                  CipherInputStream in = new CipherInputStream(new FileInputStream("FicheroPDF.Cifrado"), c);
+                  int tambloque = c.getBlockSize();//tamaño de bloque
+                  byte[] bytes = new byte[tambloque];//bloque de bytes
+                 
+                  //FICHERO CON EL CONTENIDO DESCIFRADO QUE SE CREARÁ
+                  FileOutputStream fileout = new FileOutputStream("FICHEROdescifrado.pdf");
+                 
+                  //LEEMOS BLOQUES DE BYTES DEL FICHERO cifrado
+                  //Y LO VAMOS ESCRIBIENDO desencriptados al FileOutputStream
+                  int i = in.read(bytes);
+                  while (i != -1){
+                        fileout.write(bytes, 0, i);   
+                        i = in.read(bytes);
+                  }
+                  fileout.close();
+                  in.close();
+                  System.out.println("Fichero descifrado con clave secreta.");
+                 
+            } catch (Exception e) {e.printStackTrace();}
+           
+      }
+}
+```
+
+Utiliza la clase **CipherInputStream** para leer y desencriptar datos de un fichero cifrado.
 
 **¡Salud y coding!**
