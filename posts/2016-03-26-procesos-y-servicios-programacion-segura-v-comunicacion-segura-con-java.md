@@ -1,7 +1,6 @@
 ---
 title: Procesos y servicios. Programación segura V. Comunicación segura con Java
-description: 
-author: Inazio Claver
+description: Aprende programación segura en Java con JSSE y JAAS. Tutorial completo sobre SSL/TLS, autenticación, autorización, certificados digitales y comunicación segura entre cliente-servidor con ejemplos de código.
 date: 2016-03-26 12:10:00 +0800
 categories: [Java]
 tags: [procesos y servicios, java, teoria]
