@@ -167,5 +167,184 @@ grant codeBase "URL"{
 }
 ```
 
+A la derecha de ```codeBase``` se indica la ubicación del código base sobre el que se van a definir los permisos. Su valor es una URL y siempre se debe utiliza la barra diagonal (```/```) como separador de directorio incluso para las URL de tipo file en Windows. Por ejemplo: ```grant codeBase “file:/C:/somepath/api/”```.
+Si se omite codeBase entonces los permisos se aplican a todas las fuentes.
+
+**Nombre_clase** contiene el nombre de la clase de permisos, por ejemplo:
+
+```
+java.io.FilePermission (representa acceso a fichero o directorio)
+java.net.SocketPermission (acceso a la red vía socket)
+java.util.PropertyPermission (permiso sobre propiedades del sistema), etc.
+```
+
+El parámetro **Nombre_destino** especifica el destino del permiso y depende de la clase de permiso.
+Por ejemplo si la clase de permiso es java.io.FilePermission en **Nombre_destino** se puede poner un fichero o un directorio; si la clase es ```java.net.SocketPermission``` se pondría un servidor y un número de puerto; si es ```java.util.PropertyPermission``` se pondría una propiedad del sistema.
+
+En el parámetro **Acción** se indica una lista de acciones separadas por comas, por ejemplo read, write, delete o execute para una clase de permiso ```java.io.FilePermission```; accept, listen, connect resolve para una clase de permiso ```java.netSocketPermission```; read, write para una clase de permiso ```java.util.PropertyPermission```.
+
+Desde la [URL de Oracle](http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html) se pueden consultar los permisos, sus destinos y acciones.
+
+## Ejemplo de ficheros de políticas
+
+Creamos un fichero en una carpeta determinada (en Windows ```C:\Ficheros```) e insertamos una línea, después lee el contenido del fichero y lo muestra en pantalla. El comportamiento del programa será diferente si usamos o no el gestor de seguridad y ficheros de políticas.
+
+Se añade el gestor de seguridad en el método ```main()```, la línea ```System.setSecurityManager(new SecurityManager());``` antes de la cláusula ```try```, la salida muestra un error de acceso denegado al escribir datos en el fichero, tampoco se podrá realizar la lectura del mismo.
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Ejemplo2 {
+     
+      public static void main(String[] args) {
+           
+            //El directorio C:/Ficheros debe estar creado previamente.
+            //System.setProperty ("java.security.policy", System.getProperty("user.dir") + "\\src\\_02FicherosPoliticas\\Politica2.policy");
+            //System.setSecurityManager(new SecurityManager());
+            try {
+                  //escritura en fichero
+                  BufferedWriter fichero = new BufferedWriter (new FileWriter("C://Ficheros//Fichero.txt"));
+                  fichero.write("Escritura de una linea en fichero.");
+                  fichero.newLine(); // escribe un salto de línea
+                  fichero.close();
+                  System.out.println("Final proceso de escritura...");
+                 
+                  //lectura del fichero
+                  BufferedReader fichero2 = new BufferedReader (new FileReader("C://Ficheros//Fichero.txt"));
+                  String linea = fichero2.readLine();
+                  System.out.println("Contenido del fichero: ");
+                  System.out.println("\t" + linea);
+                  fichero2.close();
+                  System.out.println("Final proceso de lectura...");
+            } catch (FileNotFoundException fn) {
+                  System.out.println("No se encuentra el fichero");
+            } catch (IOException io) {
+                  System.out.println("Error de E/S ");
+            } catch (Exception e) {
+                  System.out.println("ERROR => " + e.toString());
+            }    
+      }
+}
+```
+
+Ahora se crea el siguiente fichero de políticas de nombre Politica2.policy con el siguiente contenido:
+
+```java
+grant codeBase  "file:${user.dir}/bin/"{
+      permission java.io.FilePermission "C:\\Ficheros\\*", "read, write";
+};
+```
+
+que permite a los programas localizados en la carpeta indicada (incluido permiso para crear) ficheros en la ruta ```C\Ficheros```.
+
+## Formato grant
+
+El parámetro **Nombre_destino** para la clase de permiso ```java.io.FilePermission``` puede terminar en una serie de caracteres:
+
+- “```/```” (donde “```/```” es el carácter separador de ficheros) indica un directorio y todos los ficheros contenidos en ese directorio.
+- “```/-```“ indica un directorio y (recursivamente) todos los ficheros y subdirectorios contenidos en ese directorio.
+- “```<<ALL FILES>>```” indica cualquier fichero
+- También es posible usar propiedades de sistema como ```user.dir``` o ```user.home``` para dar privilegios sobre el directorio en el que se está ejecutando el programa o sobre el directorio por defecto del usuario. Se debe utilizar la propiedad encerrada entre llaves y con el caracer ```$``` delante. ```${propiedad}```.
+
+El parámetro **Nombre_destino** para la clase de permiso ```java.net.SocketPermission``` tiene el siguiente formato:
+
+```bash
+Host = (nombre del host | Direccion IP) [:número de puerto] donde número de puerto = N | -N | N-[M]
+```
+
+Las acciones son **accept, listen, connect y resolve**.
+El host se especifica como un nombre de host o dirección IP.
+Especificación de puerto:
+
+- “N”, puerto N
+- “N-“, todos los puertos desde N en adelante
+- “-N”, todos los puertos desde N hacia atrás
+- “M-N”, rango de puertos
+
+```java
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Ejemplo3Servidor {
+     
+      public static void main(String[] arg) {
+           
+            int numeroPuerto = 6000;// Puerto
+            ServerSocket servidor = null;
+            System.setProperty ("java.security.policy", System.getProperty("user.dir") + "\\src\\_03FicherosPoliticasSockets\\Politica3.policy");
+            System.setSecurityManager(new SecurityManager());
+           
+            try {
+                  servidor = new ServerSocket(numeroPuerto);
+                  System.out.println("Esperando al cliente.....");
+                  Socket clienteConectado = servidor.accept();
+                  System.out.println("Cliente conectado.");
+                  clienteConectado.close();
+                  System.out.println("Cliente desconectado.");
+                  servidor.close();
+            } catch (Exception e) { System.err.println("ERROR=> " + e.toString()); }
+     
+      }
+}
+```
+
+```java
+import java.net.Socket;
+
+public class Ejemplo3 {
+     
+      public static void main(String[] args) {
+           
+            String Host = "localhost";
+            int Puerto = 6000;
+            System.setProperty ("java.security.policy", System.getProperty("user.dir") + "\\src\\_03FicherosPoliticasSockets\\Politica4.policy");
+            System.setSecurityManager(new SecurityManager());   
+           
+            try {
+                  Socket Cliente = new Socket(Host, Puerto);
+                  System.out.println("CLIENTE INICIADO.");
+                  Cliente.close();
+                  System.out.println("CLIENTE FINALIZADO.");
+            } catch (Exception e) { System.err.println("ERROR=> " + e.toString()); }
+           
+      }
+}
+```
+
+```
+/*Politica para el SERVIDOR*/
+grant codeBase "file:${user.dir}/bin/" {
+  permission java.net.SocketPermission "localhost", "listen, accept";
+};
+```
+
+```
+/*Politica para el CLIENTE*/
+grant codeBase "file:${user.dir}/bin/" {
+  permission java.net.SocketPermission "localhost:6000", "connect";
+};
+```
+
+El programa servidor escucha y acepta peticiones de clientes en el puerto 6000, cuando el cliente se conecta se visualiza un mensaje y al cerrarse también.
+
+El programa cliente se conecta al servidor en el puerto 6000, visualiza unos mensajes y luego se desconecta.
+
+El fichero de políticas para el **servidor**, ```Politica3.policy```, representa un permiso que permite a los programas localizados en la carpeta ```${user.dir}/bin/``` escuchar y aceptar conexiones en localhost.
+
+El fichero de políticas para el cliente, ```Politica4.policy```, representa un permiso que permite a los programas localizados en la carpeta ```${user.dir}/bin/``` conectarse al puerto 6000 en localhost.
+
+## Herramienta PolicyTool
+
+Se recomienda usar la herramienta para editar cualquier fichero de políticas y verificar la sintaxis de su contenido.
+Para lanzarla, desde la terminal escribiremos el comando ```policytool```.
+
+![policytool 1](/img/posts/20160324_1.png)
+
+![policytool 2](/img/posts/20160324_2.png)
 
 **¡Salud y coding!**
