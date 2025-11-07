@@ -4,7 +4,6 @@ description: Aprende los fundamentos del desarrollo de software: tipos de softwa
 date: 2014-10-08 12:10:00 +0800
 categories: [Entornos de desarrollo]
 tags: [desarrollo-software, tipos-software, php, programacion, entornos-desarrollo, principiantes]
-
 pin: false
 math: false
 mermaid: false
