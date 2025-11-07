@@ -3,7 +3,7 @@ title: Entornos de desarrollo. Principios de la informática y la programación
 description: Aprende los fundamentos de la informática: máquina de Von Neumann, arquitectura de computadoras, operaciones lógicas AND/OR/NOT, registros, memoria y componentes básicos de un ordenador.
 date: 2014-10-07 16:10:00 +0800
 categories: [Entornos de desarrollo]
-tags: [informatica, von-neumann, arquitectura, operaciones-logicas, programacion]
+tags: [informatica, von-neumann, arquitectura, operaciones-logicas, programacion, entornos-desarrollo]
 
 pin: false
 math: false

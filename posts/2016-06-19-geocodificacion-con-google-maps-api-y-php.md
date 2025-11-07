@@ -4,7 +4,7 @@ description: Aprende a convertir direcciones en coordenadas con Google Maps API 
 author: Inazio Claver
 date: 2016-06-19 12:10:00 +0800
 categories: [PHP]
-tags: [php, google, google maps, api]
+tags: [php, google, google-maps, api]
 pin: false
 math: false
 mermaid: false
