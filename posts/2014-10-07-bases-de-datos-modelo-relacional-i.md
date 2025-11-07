@@ -2,8 +2,8 @@
 title: Bases de datos. Modelo relacional (I)
 description: Aprende el modelo relacional de bases de datos: tablas, tuplas, atributos y claves primarias. Guía completa sobre teoría de Codd, estructura de datos, dominios, cardinalidad y fundamentos de bases de datos relacionales.
 date: 2014-10-07 15:10:00 +0800
-categories: [Bases de datos, modelo-relacional, sql, tablas, claves-primarias, codd]
-tags: [bases de datos]
+categories: [Bases de datos, ]
+tags: [bases de datos, modelo-relacional, sql, tablas, claves-primarias, codd]
 pin: false
 math: false
 mermaid: false
