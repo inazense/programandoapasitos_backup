@@ -1,9 +1,10 @@
 ---
-title: Bases de datos. Modelo relacional (I)
-description: Aprende el modelo relacional de bases de datos: tablas, tuplas, atributos y claves primarias. Guía completa sobre teoría de Codd, estructura de datos, dominios, cardinalidad y fundamentos de bases de datos relacionales.
-date: 2014-10-07 15:10:00 +0800
+title: Entornos de desarrollo. Principios de la informática y la programación
+description: Aprende los fundamentos de la informática: máquina de Von Neumann, arquitectura de computadoras, operaciones lógicas AND/OR/NOT, registros, memoria y componentes básicos de un ordenador.
+date: 2014-10-07 16:10:00 +0800
 categories: [Entornos de desarrollo]
-tags: [entornos de desarollo]
+tags: [informatica, von-neumann, arquitectura, operaciones-logicas, programacion]
+
 pin: false
 math: false
 mermaid: false
