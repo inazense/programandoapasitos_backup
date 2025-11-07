@@ -66,3 +66,5 @@ Guarda los programas y datos en memoria. También permite dirigir instrucciones 
 
 **Instrucciones (Programa)** -> S.O. / PROGRAMA / DATOS
 **Lenguaje ensamblador**: Primer lenguaje de alto nivel. Sustitución básica de operaciones a código máquina.
+
+**¡Salud y coding!**
