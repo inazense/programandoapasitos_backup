@@ -4,7 +4,7 @@ description: Guía completa para instalar y configurar Git en Windows paso a pas
 author: Inazio Claver
 date: 2016-08-21 12:10:00 +0800
 categories: [Git]
-tags: [git, windows]
+tags: [git, windows, instalacion, configuracion, control-versiones, git-config]
 pin: false
 math: false
 mermaid: false

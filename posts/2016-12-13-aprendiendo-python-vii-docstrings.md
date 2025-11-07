@@ -4,7 +4,7 @@ description: Aprende a crear documentación automática en Python usando docstri
 author: Inazio Claver
 date: 2016-12-13 12:10:00 +0800
 categories: [Python]
-tags: [python, poo]
+tags: [python, docstrings, documentacion, api, poo, help]
 pin: false
 math: false
 mermaid: false

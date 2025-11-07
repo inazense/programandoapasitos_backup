@@ -1,10 +1,10 @@
 ---
 title: Crear una barra de progreso en la terminal con Python
-description: Cómo implementar una barra de progreso usando tqdm
+description: Aprende a crear barras de progreso en la terminal con Python usando tqdm. Tutorial completo paso a paso sobre instalación, uso en bucles for/while, iteración de listas y ejemplos prácticos de código.
 author: Inazio Claver
 date: 2019-11-04 11:33:00 +0800
 categories: [Python]
-tags: [python]
+tags: [python, tqdm, barra-progreso, terminal, cli, progress-bar]
 pin: false
 math: false
 mermaid: false

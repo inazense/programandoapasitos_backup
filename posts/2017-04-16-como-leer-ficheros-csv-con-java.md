@@ -1,10 +1,10 @@
 ---
 title: Cómo leer ficheros CSV con Java
-description: Tutorial para leer csv simples y complejos con Java
+description: Aprende a leer archivos CSV en Java con BufferedReader y OpenCSV. Tutorial completo paso a paso para procesar CSV simples y complejos, manejar comillas, separadores y caracteres especiales con ejemplos de código.
 author: Inazio Claver
 date: 2017-04-16 12:10:00 +0800
 categories: [Java]
-tags: [java, csv]
+tags: [java, csv, opencsv, bufferedreader, archivos, parsing, delimitadores]
 pin: false
 math: false
 mermaid: false

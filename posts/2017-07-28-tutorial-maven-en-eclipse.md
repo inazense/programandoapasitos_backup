@@ -1,10 +1,10 @@
 ---
-title: Tutorial Maven en Eclipse
-description: Guía práctica para crear y configurar proyectos Maven en Eclipse, cubriendo POM, dependencias, plugins y solución de errores comunes.
+title: Tutorial Maven en Eclipse I
+description: Aprende a usar Maven en Eclipse desde cero paso a paso. Tutorial completo sobre creación de proyectos, configuración del POM.xml, gestión de dependencias, plugins, arquetipos y solución de errores JDK/JRE con ejemplos prácticos.
 author: Inazio Claver
 date: 2017-07-28 12:10:00 +0800
 categories: [Java]
-tags: [java, maven]
+tags: [java, maven, eclipse, pom, dependencias, plugins, arquetipos, jdk]
 pin: false
 math: false
 mermaid: false

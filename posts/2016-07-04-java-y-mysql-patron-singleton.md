@@ -4,7 +4,7 @@ description: Aprende a implementar el patrón Singleton en Java para conexiones 
 author: Inazio Claver
 date: 2016-07-04 12:10:00 +0800
 categories: [Java]
-tags: [java, mysql, patrones]
+tags: [java, mysql, singleton, patrones-diseño, jdbc, base-datos]
 pin: false
 math: false
 mermaid: false

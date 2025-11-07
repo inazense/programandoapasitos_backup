@@ -1,10 +1,10 @@
 ---
 title: Resolver sudokus en Java
-description: Tutorial paso a paso para resolver sudoku en Java, tanto la lógica como interfaz gráfica
+description: Aprende a crear un programa que resuelve sudokus automáticamente en Java con algoritmo de backtracking. Tutorial completo paso a paso con código, interfaz gráfica Swing, validación de reglas y ejemplos prácticos de fuerza bruta.
 author: Inazio Claver
 date: 2017-07-19 12:10:00 +0800
 categories: [Java]
-tags: [java, sudoku]
+tags: [java, sudoku, algoritmos, backtracking, swing, interfaz-grafica, recursividad]
 pin: false
 math: false
 mermaid: false

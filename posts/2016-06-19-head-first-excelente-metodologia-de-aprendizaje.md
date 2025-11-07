@@ -4,7 +4,7 @@ description: Descubre la metodología Head First de O'Reilly para aprender progr
 author: Inazio Claver
 date: 2016-06-19 11:10:00 +0800
 categories: [Libros]
-tags: [libros]
+tags: [libros, head-first, oreilly, programacion, aprendizaje, java, patrones-diseño]
 pin: false
 math: false
 mermaid: false

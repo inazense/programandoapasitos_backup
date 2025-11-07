@@ -3,8 +3,8 @@ title: Zen coding con Emmet
 description: Aprende Zen Coding con Emmet para acelerar el desarrollo web. Tutorial completo sobre abreviaturas HTML y CSS, instalación en editores, atajos esenciales y ejemplos prácticos para programar más rápido.
 author: Inazio Claver
 date: 2016-09-19 11:10:00 +0800
-categories: [Web, html, css, productividad, zen-coding, emmet]
-tags: [web]
+categories: [Web]
+tags: [emmet, zen-coding, html, css, productividad]
 pin: false
 math: false
 mermaid: false

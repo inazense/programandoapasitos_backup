@@ -1,10 +1,10 @@
 ---
 title: Envío de emails en Python
-description: Aprende a enviar emails automáticamente con Python usando smtplib. Tutorial completo con código para automatizar correos electrónicos, formatear fechas y configurar servidores SMTP paso a paso.
+description: Aprende a enviar emails automáticamente con Python usando smtplib. Tutorial completo con código para automatizar correos electrónicos, formatear fechas, configurar servidores SMTP y gestión de errores paso a paso
 author: Inazio Claver
 date: 2016-12-20 12:10:00 +0800
 categories: [Python]
-tags: [python, emails]
+tags: [python, emails, smtplib, automatizacion, smtp, scripting]
 pin: false
 math: false
 mermaid: false

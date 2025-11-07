@@ -4,7 +4,7 @@ description: Crea una galería web responsive con HTML5, Bootstrap, PHP y Magnif
 author: Inazio Claver
 date: 2016-10-12 13:00:00 +0800
 categories: [Web]
-tags: [responsive, html5, bootstrap, php, web]
+tags: [html5, bootstrap, php, magnific-popup, galeria-responsive, lightbox, jquery, web]
 pin: false
 math: false
 mermaid: false

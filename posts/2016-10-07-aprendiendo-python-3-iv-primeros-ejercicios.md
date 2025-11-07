@@ -4,7 +4,7 @@ description: Colección de 30 ejercicios prácticos de Python para principiantes
 author: Inazio Claver
 date: 2016-10-07 12:10:00 +0800
 categories: [Python]
-tags: [python, ejercicios]
+tags: [python, ejercicios, principiantes, algoritmos, bucles, funciones, codigo]
 pin: false
 math: false
 mermaid: false

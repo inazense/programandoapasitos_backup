@@ -1,10 +1,10 @@
 ---
 title: Leer ficheros properties en Java
-description: Tutorial sobre cómo leer archivos de propiedades en Java usando la clase Properties
+description: Aprende a leer archivos properties en Java con la clase Properties. Tutorial completo paso a paso sobre getProperty, Enumeration, carga de ficheros .properties y ejemplos prácticos de configuración con código.
 author: Inazio Claver
 date: 2017-12-12 17:11:00 +0800
 categories: [Java]
-tags: [java, properties]
+tags: [java, properties, configuracion, fileReader, getProperty, enumeration]
 pin: false
 math: false
 mermaid: false

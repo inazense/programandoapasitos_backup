@@ -1,10 +1,10 @@
 ---
 title: Java. Ordenar un HashMap por key o value
-description: Tutorial sobre la ordenaciónde hashmaps en Java
+description: Aprende a ordenar HashMap en Java por clave o valor con streams y lambdas. Tutorial completo con código paso a paso sobre sorting de Map, entrySet, comparingInt y LinkedHashMap con ejemplos prácticos.
 author: Inazio Claver
 date: 2020-12-03 11:33:00 +0800
 categories: [Java]
-tags: [java]
+tags: [java, hashmap, map, ordenacion, streams, sorting, collections]
 pin: false
 math: false
 mermaid: false

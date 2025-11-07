@@ -1,10 +1,10 @@
 ---
 title: Sincronizar carpetas externas en OneDrive
-description: Cómo sincronizar carpetas que están fuera de la carpeta de OneDrive usando enlaces simbólicos
+description: Aprende a sincronizar carpetas externas en OneDrive con enlaces simbólicos usando mklink. Tutorial paso a paso para crear backup automático de cualquier carpeta en Windows con el símbolo del sistema.
 author: Inazio Claver
 date: 2019-02-15 11:33:00 +0800
 categories: [Sistemas]
-tags: [onedrive, windows, enlaces-simbolicos, mklink, sincronizacion, backup]
+tags: [onedrive, windows, enlaces-simbolicos, mklink, sincronizacion, backup, cloud]
 pin: false
 math: false
 mermaid: false

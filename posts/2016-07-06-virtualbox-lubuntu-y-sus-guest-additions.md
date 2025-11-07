@@ -4,7 +4,7 @@ description: Guía paso a paso para instalar Guest Additions en VirtualBox con L
 author: Inazio Claver
 date: 2016-07-06 12:10:00 +0800
 categories: [Linux]
-tags: [linux, virtualización]
+tags: [virtualbox, lubuntu, guest-additions, linux, virtualizacion, gcc, make]
 pin: false
 math: false
 mermaid: false

@@ -4,7 +4,7 @@ description: Aprende programación orientada a objetos en Python desde cero. Tut
 author: Inazio Claver
 date: 2016-11-01 12:10:00 +0800
 categories: [Python]
-tags: [python, poo]
+tags: [python, poo, clases, objetos, metodos, self, orientado-objetos]
 pin: false
 math: false
 mermaid: false

@@ -4,7 +4,7 @@ description: Aprende a usar el método __init__ en Python para inicializar objet
 author: Inazio Claver
 date: 2016-12-10 12:10:00 +0800
 categories: [Python]
-tags: [python, poo]
+tags: [python, poo, __init__, constructores, inicializacion, none]
 pin: false
 math: false
 mermaid: false

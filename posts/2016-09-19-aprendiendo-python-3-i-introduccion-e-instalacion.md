@@ -4,7 +4,7 @@ description: Guía completa para principiantes sobre Python 3: instalación paso
 author: Inazio Claver
 date: 2016-09-19 12:10:00 +0800
 categories: [Python]
-tags: [python]
+tags: [python, instalacion, principiantes, python3, tutorial, hola-mundo]
 pin: false
 math: false
 mermaid: false

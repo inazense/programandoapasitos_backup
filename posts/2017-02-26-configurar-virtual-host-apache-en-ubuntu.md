@@ -1,10 +1,10 @@
 ---
 title: Configurar Virtual Host Apache en Ubuntu
-description: Guía completa paso a paso para configurar Virtual Host de Apache en Ubuntu 16.04. Aprende a crear múltiples sitios web locales con dominios personalizados, configurar DNS local y gestionar permisos correctamente.
+description: Guía completa paso a paso para configurar Virtual Host de Apache en Ubuntu 16.04. Aprende a crear múltiples sitios web locales con dominios personalizados, configurar DNS local y gestionar permisos correctamente
 author: Inazio Claver
-date: 2017-04-16 12:10:00 +0800
+date: 2017-02-26 12:10:00 +0800
 categories: [Sistemas]
-tags: [virtualización, ubuntu, apache]
+tags: [apache, ubuntu, virtual-host, linux, dns, servidor-web, configuracion]
 pin: false
 math: false
 mermaid: false

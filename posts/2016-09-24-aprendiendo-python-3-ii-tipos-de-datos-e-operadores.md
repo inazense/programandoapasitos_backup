@@ -4,7 +4,7 @@ description: Aprende tipos de datos fundamentales en Python 3: números, strings
 author: Inazio Claver
 date: 2016-09-24 12:10:00 +0800
 categories: [Python]
-tags: [python]
+tags: [python, tipos-datos, operadores, strings, listas, tuplas, booleanos]
 pin: false
 math: false
 mermaid: false
