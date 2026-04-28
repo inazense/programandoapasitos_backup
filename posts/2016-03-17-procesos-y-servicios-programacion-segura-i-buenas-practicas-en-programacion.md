@@ -1,6 +1,6 @@
 ---
 title: Procesos y servicios. Programación segura I. Buenas prácticas en programación
-description: Aprende buenas prácticas en programación segura: validación de datos, revisión de código, control de acceso y prevención de vulnerabilidades. Guía completa sobre seguridad en desarrollo de software con ejemplos prácticos.
+description: "Aprende buenas prácticas en programación segura: validación de datos, revisión de código, control de acceso y prevención de vulnerabilidades. Guía completa sobre seguridad en desarrollo de software con ejemplos prácticos."
 date: 2016-03-17 12:10:00 +0800
 categories: [Java]
 tags: [procesos-servicios, java, teoria, programacion-segura, buenas-practicas, validacion-datos, seguridad, codigo-limpio]

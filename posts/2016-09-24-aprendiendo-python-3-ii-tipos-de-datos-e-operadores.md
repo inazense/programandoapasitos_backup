@@ -1,6 +1,6 @@
 ---
 title: Aprendiendo Python (II). Tipos de datos y operadores
-description: Aprende tipos de datos fundamentales en Python 3: números, strings, listas, tuplas y booleanos. Tutorial completo con operadores aritméticos, manipulación de cadenas, arrays y ejemplos prácticos paso a paso.
+description: "Aprende tipos de datos fundamentales en Python 3: números, strings, listas, tuplas y booleanos. Tutorial completo con operadores aritméticos, manipulación de cadenas, arrays y ejemplos prácticos paso a paso."
 author: Inazio Claver
 date: 2016-09-24 12:10:00 +0800
 categories: [Python]

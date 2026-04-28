@@ -1,6 +1,6 @@
 ---
 title: Programación. Presentación del lenguaje Java y del entorno de desarrollo Eclipse (II)
-description: Elementos básicos de Java: comentarios, variables, tipos de datos primitivos, operadores y estructuras de control.
+description: "Elementos básicos de Java: comentarios, variables, tipos de datos primitivos, operadores y estructuras de control."
 author: Inazio Claver
 date: 2015-03-15 09:30:00 +0800
 categories: [Java, Programación]
